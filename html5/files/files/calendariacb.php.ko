@@ -1,0 +1,39 @@
+<?php
+echo '<?xml version="1.0" encoding="utf-8"?>';
+echo '<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">';
+echo '<xsl:template match="/">';
+if (isset($_GET['jornada'])) {
+	$jornada = $_GET['jornada'];
+}
+else {
+	$jornada = "8";
+}
+?>
+<html>
+	<head></head>
+	<body>
+<table border="1" width="400" align="center">
+	<caption> Jornada <?php echo $jornada; ?> </caption>
+	<tbody>
+		<th class="normal">Pts</th>
+		<th class="normal">Equip Local</th>
+		<th class="normal">Equip Visitant</th>
+		<th class="normal">Pts</th>
+	</tbody>
+
+<?php
+echo '<xsl:for-each select="'."tallerxml/calendariacb[jornada='" . $jornada . '"]" >'
+echo '	<tr>';
+echo '		<td><xsl:value-of select="punts_local" /></td>';
+echo '		<td> <xsl:value-of select="equip_local" /></td>';
+echo '		<td> <xsl:value-of select="equip_visitant" /></td>';
+echo '		<td><xsl:value-of select="punts_visitant" /></td>';
+echo '	</tr>';
+echo '   </xsl:for-each>';
+?>
+</table>  
+</body>
+</html>
+
+</xsl:template>
+</xsl:stylesheet>     
